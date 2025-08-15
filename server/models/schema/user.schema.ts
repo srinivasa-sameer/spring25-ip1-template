@@ -11,6 +11,11 @@ import { Schema } from 'mongoose';
  */
 const userSchema: Schema = new Schema(
   // TODO: Task 1 - Define the schema for a user
+  {
+    username: { type: String, required: true, unique: true, immutable: true },
+    password: { type: String, required: true },
+    dateJoined: { type: Date, default: Date.now },
+  },
   { collection: 'User' },
 );
 

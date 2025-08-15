@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "axios": "^1.11.0",
+    "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "mockingoose": "^2.16.2"
+  }
+}
