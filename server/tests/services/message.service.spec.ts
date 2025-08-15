@@ -34,6 +34,15 @@ describe('Message model', () => {
       expect(savedMessage).toMatchObject(message1);
     });
     // TODO: Task 2 - Write a test case for saveMessage when an error occurs
+    it('should throw an error if error occurs when saving to database', async () => {
+      jest
+        .spyOn(MessageModel, 'create')
+        .mockRejectedValueOnce(() => new Error('Error saving document'));
+
+      const saveError = await saveMessage(message1);
+
+      expect('error' in saveError).toBe(true);
+    });
   });
 
   describe('getMessages', () => {
@@ -45,5 +54,14 @@ describe('Message model', () => {
       expect(messages).toMatchObject([message1, message2]);
     });
     // TODO: Task 2 - Write a test case for getMessages when an error occurs
+    it('should return an empty array if error when retrieving messages', async () => {
+      jest
+        .spyOn(MessageModel, 'find')
+        .mockRejectedValueOnce(new Error('Error retrieving documents'));
+
+      const messages = await getMessages();
+
+      expect(messages).toEqual([]);
+    });
   });
 });
