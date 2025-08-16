@@ -14,7 +14,7 @@ export const saveMessage = async (message: Message): Promise<MessageResponse> =>
     const savedMessage = await MessageModel.create(message);
     return savedMessage;
   } catch (error) {
-    return { error: 'Error occured while saving message' };
+    return { error: 'Error occurred while saving message' };
   }
 };
 

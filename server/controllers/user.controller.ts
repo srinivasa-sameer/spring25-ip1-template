@@ -128,8 +128,7 @@ const userController = () => {
 
       res.status(200).json(deletedUser);
     } catch (error) {
-      // Change from .send() to .json() and keep "occured" spelling to match test
-      res.status(500).json({ error: `Error occured when deleting user by username: ${error}` });
+      res.status(500).json({ error: `Error occurred when deleting user by username: ${error}` });
     }
   };
 
@@ -156,7 +155,7 @@ const userController = () => {
 
       res.status(200).json(updatedUser);
     } catch (error) {
-      res.status(500).json({ error: `Error when updating user password: ${error}` });
+      res.status(500).json({ error: `Error occurred when updating user password: ${error}` });
     }
   };
 

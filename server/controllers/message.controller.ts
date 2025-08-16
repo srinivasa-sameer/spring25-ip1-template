@@ -64,13 +64,13 @@ const messageController = (socket: FakeSOSocket) => {
     try {
       const savedMessage = await saveMessage(messageToAdd);
       if ('error' in savedMessage) {
-        res.status(500).send(`Error when adding a message: ${savedMessage.error}`);
+        res.status(500).send(`Error occurred when adding a message: ${savedMessage.error}`);
       } else {
         socket.emit('messageUpdate', { msg: savedMessage });
         res.status(200).send(savedMessage);
       }
     } catch (error) {
-      res.status(500).send(`Error when adding a message: ${(error as Error).message}`);
+      res.status(500).send(`Error occurred when adding a message: ${(error as Error).message}`);
     }
   };
 

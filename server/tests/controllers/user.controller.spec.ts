@@ -58,7 +58,7 @@ describe('Test userController', () => {
     });
 
     // TODO: Task 1 - Write additional test cases for signupRoute
-    it('should return 400 for request with empty username', async () => {
+    it('should return an error with code 400 for request body with empty username', async () => {
       const mockReqBody = {
         username: '',
         password: mockUser.password,
@@ -69,7 +69,7 @@ describe('Test userController', () => {
       expect(response.status).toBe(400);
     });
 
-    it('should return 400 for request missing password', async () => {
+    it('should return an error with code 400 for request body with missing password', async () => {
       const mockReqBody = {
         username: mockUser.username,
       };
@@ -79,7 +79,7 @@ describe('Test userController', () => {
       expect(response.status).toBe(400);
     });
 
-    it('should return 400 for request with empty password', async () => {
+    it('should return an error with code 400 for request body with empty password', async () => {
       const mockReqBody = {
         username: mockUser.username,
         password: '',
@@ -90,7 +90,7 @@ describe('Test userController', () => {
       expect(response.status).toBe(400);
     });
 
-    it('should return 500 when error occurs in database while saving', async () => {
+    it('should return error with code500 when error occurs in database while saving', async () => {
       const mockReqBody = {
         username: mockUser.username,
         password: mockUser.password,
@@ -132,7 +132,7 @@ describe('Test userController', () => {
     });
 
     // TODO: Task 1 - Write additional test cases for loginRoute
-    it('should return 400 for request with empty username', async () => {
+    it('should return an error with code 400 for request body with empty username', async () => {
       const mockReqBody = {
         username: '',
         password: mockUser.password,
@@ -143,7 +143,7 @@ describe('Test userController', () => {
       expect(response.status).toBe(400);
     });
 
-    it('should return 400 for request missing password', async () => {
+    it('should return an error with code 400 for request body with missing password', async () => {
       const mockReqBody = {
         username: mockUser.username,
       };
@@ -153,7 +153,7 @@ describe('Test userController', () => {
       expect(response.status).toBe(400);
     });
 
-    it('should return 400 for request with empty password', async () => {
+    it('should return an error with code 400 for request body with empty password', async () => {
       const mockReqBody = {
         username: mockUser.username,
         password: '',
@@ -164,7 +164,7 @@ describe('Test userController', () => {
       expect(response.status).toBe(400);
     });
 
-    it('should return 500 for an error in database while saving', async () => {
+    it('should return an error with code 500 for an error in database while saving', async () => {
       const mockReqBody = {
         username: mockUser.username,
         password: mockUser.password,
@@ -206,7 +206,7 @@ describe('Test userController', () => {
     });
 
     // TODO: Task 1 - Write additional test cases for resetPasswordRoute
-    it('should return 400 if username is empty', async () => {
+    it('should return an error with code 400 if username is empty in request body', async () => {
       const mockReqBody = {
         username: '',
         password: 'newPassword',
@@ -218,7 +218,7 @@ describe('Test userController', () => {
       expect(response.text).toEqual('Invalid user body');
     });
 
-    it('should return 400 if password is missing', async () => {
+    it('should return an error with code 400 if password is missing in request body', async () => {
       const mockReqBody = {
         username: mockUser.username,
       };
@@ -229,7 +229,7 @@ describe('Test userController', () => {
       expect(response.text).toEqual('Invalid user body');
     });
 
-    it('should return 400 if password is empty', async () => {
+    it('should return an error with code 400 if password is empty in request body', async () => {
       const mockReqBody = {
         username: mockUser.username,
         password: '',
@@ -241,7 +241,7 @@ describe('Test userController', () => {
       expect(response.text).toEqual('Invalid user body');
     });
 
-    it('should return 500 if service returns an error object', async () => {
+    it('should return an error with code 500 if an error occurs while updating user', async () => {
       const mockReqBody = {
         username: mockUser.username,
         password: 'newPassword',
@@ -253,7 +253,7 @@ describe('Test userController', () => {
 
       expect(response.status).toBe(500);
       expect(response.body.error).toContain(
-        'Error when updating user password: Error: Error updating user',
+        'Error occurred when updating user password: Error: Error updating user',
       );
     });
   });
@@ -277,7 +277,7 @@ describe('Test userController', () => {
     });
 
     // TODO: Task 1 - Write additional test cases for getUserRoute
-    it('should return 500 if service returns an error object', async () => {
+    it('should return an error with code 500 if an error occurs while getting a user', async () => {
       getUserByUsernameSpy.mockResolvedValueOnce({ error: 'User not found' });
       const response = await supertest(app).get(`/user/getUser/${mockUser.username}`);
       expect(response.status).toBe(500);
@@ -306,12 +306,12 @@ describe('Test userController', () => {
     });
 
     // TODO: Task 1 - Write additional test cases for deleteUserRoute
-    it('should return 500 if service returns an error object', async () => {
+    it('should return an error with code 500 if error occurs while deleting user', async () => {
       deleteUserByUsernameSpy.mockResolvedValueOnce({ error: 'User not found' });
       const response = await supertest(app).delete(`/user/deleteUser/${mockUser.username}`);
       expect(response.status).toBe(500);
       expect(response.body.error).toContain(
-        'Error occured when deleting user by username: Error: User not found',
+        'Error occurred when deleting user by username: Error: User not found',
       );
     });
   });

@@ -54,7 +54,7 @@ describe('Message model', () => {
       expect(messages).toMatchObject([message1, message2]);
     });
     // TODO: Task 2 - Write a test case for getMessages when an error occurs
-    it('should return an empty array if error when retrieving messages', async () => {
+    it('should return an empty array if error occurs when retrieving messages', async () => {
       jest
         .spyOn(MessageModel, 'find')
         .mockRejectedValueOnce(new Error('Error retrieving documents'));

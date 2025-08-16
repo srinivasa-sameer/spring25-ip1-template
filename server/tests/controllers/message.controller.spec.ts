@@ -39,7 +39,7 @@ describe('POST /addMessage', () => {
   });
 
   // TODO: Task 2 - Write additional test cases for addMessageRoute
-  it('should return internal server error if saveMessage fails', async () => {
+  it('should return an internal server error if an error occurs while saving a message', async () => {
     const validId = new mongoose.Types.ObjectId();
     const message = {
       _id: validId,
@@ -55,10 +55,10 @@ describe('POST /addMessage', () => {
       .send({ messageToAdd: message });
 
     expect(response.status).toBe(500);
-    expect(response.text).toBe('Error when adding a message: Error saving document');
+    expect(response.text).toBe('Error occurred when adding a message: Error saving document');
   });
 
-  it('should return internal server error if an unexpected error occurs', async () => {
+  it('should return an internal server error if an unexpected error occurs', async () => {
     const validId = new mongoose.Types.ObjectId();
     const message = {
       _id: validId,
@@ -74,10 +74,10 @@ describe('POST /addMessage', () => {
       .send({ messageToAdd: message });
 
     expect(response.status).toBe(500);
-    expect(response.text).toBe('Error when adding a message: Unexpected error');
+    expect(response.text).toBe('Error occurred when adding a message: Unexpected error');
   });
 
-  it('should return bad message body error if msg is empty', async () => {
+  it('should return bad message body error if an empty msg is passed', async () => {
     const badMessage = {
       msg: '',
       msgFrom: 'sameer1306',
@@ -198,7 +198,7 @@ describe('GET /getMessages', () => {
     ]);
   });
 
-  it('should return server error if getMessages throws an exception', async () => {
+  it('should return server error if an exception is thrown while getting messages', async () => {
     getMessagesSpy.mockRejectedValue(new Error('Database error'));
     const response = await supertest(app).get('/messaging/getMessages');
     expect(response.status).toBe(500);
